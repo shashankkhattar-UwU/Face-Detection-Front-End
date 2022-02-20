@@ -54,11 +54,7 @@ class App extends Component{
     };
     fetch("https://api.clarifai.com/v2/models/f76196b43bbd45c99b4f3cd8e8b40a8a/outputs", requestOptions)
       .then(response => response.json())
-      // .then(response => {
-      //   console.log(response);
-      //   return response;
-      // })
-      .then(result=>result.outputs[0].data.regions) //[0].region_info.bounding_box
+      .then(result=>result.outputs[0].data.regions) 
       .then(result=>this.displayBoxes(this.calculateFaceLocation(result)))
       .catch(error => console.log('error, No face found!'));
   }
@@ -76,7 +72,6 @@ class App extends Component{
       bottomRow: height - (faceBox.bottom_row * height),
       }
     });
-    // console.log(ans);
     return ans;
   }
   displayBoxes=(box)=>{
