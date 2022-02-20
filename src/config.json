@@ -1,7 +1,7 @@
 {
     "clarifai": {
-        "UserId": "shashank_69",
-        "AppId": "df28d08e58e64047b05fb709786f52f3",
-        "AuthKey": "Key e359d173563444daa295d01c84ba7f9d"
+        "UserId": "[Your user Id]",
+        "AppId": "[Your App Id]",
+        "AuthKey": "Key [Your Authorization key]"
     }
 }
