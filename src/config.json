@@ -1,0 +1,7 @@
+{
+    "clarifai": {
+        "UserId": "[Your user Id]",
+        "AppId": "[Your app Id]",
+        "AuthKey": "Key [Your Authorization key]"
+    }
+}
