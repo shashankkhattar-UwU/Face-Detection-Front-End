@@ -20,7 +20,7 @@ class App extends Component{
     this.state={
       input: '',
       imageURL: '',
-      box: {}
+      box: []
     }
   }
   onInputChange = (event)=>{
@@ -54,25 +54,32 @@ class App extends Component{
     };
     fetch("https://api.clarifai.com/v2/models/f76196b43bbd45c99b4f3cd8e8b40a8a/outputs", requestOptions)
       .then(response => response.json())
-      .then(result=>result.outputs[0].data.regions[0].region_info.bounding_box)
-      .then(result=>this.displayBox(this.calculateFaceLocation(result)))
+      // .then(response => {
+      //   console.log(response);
+      //   return response;
+      // })
+      .then(result=>result.outputs[0].data.regions) //[0].region_info.bounding_box
+      .then(result=>this.displayBoxes(this.calculateFaceLocation(result)))
       .catch(error => console.log('error, No face found!'));
-    console.log('clicked this right');
   }
   calculateFaceLocation = (data) =>{
-    const faceBox=data;
+    var ans=[];
     const image=document.getElementById('inputImage');
     const width=Number(image.width);
     const height=Number(image.height);
-    return{
+    ans=data.map(x=>{
+      const faceBox=x.region_info.bounding_box;
+      return{
       leftCol: faceBox.left_col * width,
       topRow: faceBox.top_row * height,
       rightCol: width - (faceBox.right_col * width),
       bottomRow: height - (faceBox.bottom_row * height),
-
-    }
+      }
+    });
+    // console.log(ans);
+    return ans;
   }
-  displayBox=(box)=>{
+  displayBoxes=(box)=>{
     this.setState({box: box});
   }
   render(){
